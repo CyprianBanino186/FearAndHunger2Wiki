@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+    <style>
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+        background-image: url('../img/background.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-attachment: fixed;
+        color: #fff;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    header {
+        width: 100%;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+
+    .home a {
+        color: orange;
+    }
+
+    .header-content {
+        display: flex;
+        align-items: center;
+    }
+
+    .logo {
+        height: 60px;
+        margin-right: 20px;
+    }
+
+    nav {
+        flex-grow: 1;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 15px;
+    }
+
+        .nav-links li a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+            .nav-links li a:hover {
+                color: #ccc;
+            }
+
+    main {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+
+    .home {
+        background-color: #222; /* Solid background */
+        padding: 40px;
+        border: 1px solid #444;
+        width: 120%; /* Increased width */
+        max-width: 1000px; /* Increased max-width */
+        margin: 20px auto;
+    }
+
+        .home h1 {
+            margin-bottom: 20px;
+        }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #555;
+        padding: 10px;
+        text-align: center;
+    }
+
+    th {
+        background-color: #444;
+    }
+
+    td {
+        background-color: #333;
+    }
+
+    img {
+        max-width: 100%; /* Make sure images do not exceed their container */
+    }
+
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="/Home/Index">
+                <img src="~/img/logo.png" alt="Fear & Hunger Wiki" class="logo">
+            </a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="/Artykuly/Index">Postacie</a></li>
+                    <li><a href="/CoinFlip/Index">Rzut Monetą</a></li>
+                    <li><a href="/Credity/Index">Credity</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        @RenderBody()
+    </main>
+</body>
+</html>
+

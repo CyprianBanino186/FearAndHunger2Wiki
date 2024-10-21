@@ -1,0 +1,84 @@
+﻿@model FearAndHunger2Wiki.Models.Postac
+
+<main>
+    <section class="home">
+        <h1>Edytuj Postać</h1>
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div>
+                <label asp-for="Imie"></label>
+                <input asp-for="Imie" required />
+            </div>
+            <div>
+                <label asp-for="Wiek"></label>
+                <input asp-for="Wiek" />
+            </div>
+            <div>
+                <label asp-for="Alias"></label>
+                <input asp-for="Alias" />
+            </div>
+            <div>
+                <label asp-for="Krewni"></label>
+                <input asp-for="Krewni" />
+            </div>
+            <div>
+                <label asp-for="MiejsceUrodzenia"></label>
+                <input asp-for="MiejsceUrodzenia" />
+            </div>
+            <div>
+                <label asp-for="RokUrodzenia"></label>
+                <input asp-for="RokUrodzenia" />
+            </div>
+            <div>
+                <label asp-for="Fabula"></label>
+                <textarea asp-for="Fabula"></textarea>
+            </div>
+            <div>
+                <label asp-for="Lokacja"></label>
+                <input asp-for="Lokacja" />
+            </div>
+            <div>
+                <label asp-for="Rekrutowanie"></label>
+                <input asp-for="Rekrutowanie" />
+            </div>
+            <div>
+                <label asp-for="Obrazek"></label>
+                <input asp-for="Obrazek" />
+            </div>
+            <div>
+                <label asp-for="Obrazek2"></label>
+                <input asp-for="Obrazek2" />
+            </div>
+            <div>
+                <label asp-for="StatyText"></label>
+                <textarea asp-for="StatyText"></textarea>
+            </div>
+            <div>
+                <label asp-for="StatAtak"></label>
+                <input type="number" asp-for="StatAtak" />
+            </div>
+            <div>
+                <label asp-for="StatObrona"></label>
+                <input type="number" asp-for="StatObrona" />
+            </div>
+            <div>
+                <label asp-for="StatMAtak"></label>
+                <input type="number" asp-for="StatMAtak" />
+            </div>
+            <div>
+                <label asp-for="StatMObrona"></label>
+                <input type="number" asp-for="StatMObrona" />
+            </div>
+            <div>
+                <label asp-for="StatZwinność"></label>
+                <input type="number" asp-for="StatZwinność" />
+            </div>
+            <div>
+                <label asp-for="StatSzczęście"></label>
+                <input type="number" asp-for="StatSzczęście" />
+            </div>
+            <button type="submit">Zapisz zmiany</button>
+        </form>
+        <a asp-controller="Postaci" asp-action="Index">Powrót do listy postaci</a>
+    </section>
+</main>

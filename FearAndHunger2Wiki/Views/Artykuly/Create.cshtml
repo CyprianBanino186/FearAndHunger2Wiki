@@ -1,0 +1,23 @@
+﻿@model FearAndHunger2Wiki.Models.Artykul
+
+<main>
+    <section class="home">
+        <h1>Dodaj nowy artykuł</h1>
+        <form asp-action="Create" method="post">
+            <div>
+                <label asp-for="Tytul"></label>
+                <input asp-for="Tytul" required />
+            </div>
+            <div>
+                <label asp-for="WygladUrl"></label>
+                <input asp-for="WygladUrl" required />
+            </div>
+            <div>
+                <label asp-for="Tresc"></label>
+                <textarea asp-for="Tresc" required></textarea>
+            </div>
+            <button type="submit">Dodaj</button>
+            <a asp-action="Index">Anuluj</a>
+        </form>
+    </section>
+</main>

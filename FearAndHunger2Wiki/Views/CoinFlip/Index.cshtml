@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Rzut Monetą";
+}
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rzut Monetą</title>
+    <style>
+        #coinImage {
+            display: block; /* Ustaw domyślnie na blok */
+            max-width: 300px; /* Dostosuj do swoich potrzeb */
+            margin: auto; /* Wyśrodkowanie obrazka */
+        }
+    </style>
+</head>
+<body>
+    <button id="flipBtn">Rzuć Monetą</button>
+
+    <div>
+        <img id="coinImage" src="https://i.redd.it/cuqznsrai9gb1.jpg" alt="Rzut monetą" />
+    </div>
+
+    <!-- Element audio do odtwarzania dźwięku -->
+    <audio id="coinSound" src="/audio/coin_sound.mp3" preload="auto"></audio>
+
+    <script>
+        const headsGif = "/images/orzel.webp"; // GIF WebP
+        const headsStatic = "/images/orzel_static.webp"; // Statyczny obrazek
+        const tailsGif = "/images/reszka.webp"; // GIF WebP
+        const tailsStatic = "/images/reszka_static.webp"; // Statyczny obrazek
+
+        let timeoutId; // Zmienna do przechowywania identyfikatora timeoutu
+        let isFlipping = false; // Flaga do śledzenia stanu animacji
+        const coinSound = document.getElementById("coinSound"); // Element dźwięku
+
+        document.getElementById("flipBtn").onclick = function () {
+            if (isFlipping) return; // Nie pozwól na ponowne kliknięcie, jeśli animacja trwa
+
+            // Ustaw flagę na true
+            isFlipping = true;
+
+            // Odtwarzanie dźwięku
+            coinSound.currentTime = 0; // Resetowanie czasu dźwięku
+            coinSound.play();
+
+            // Losowanie wyniku
+            const result = Math.random() < 0.5 ? 'heads' : 'tails'; // 50% szans na orła lub reszkę
+
+            if (result === 'heads') {
+                // Pokazuje GIF orła
+                document.getElementById("coinImage").src = headsGif;
+
+                // Po 2700 milisekundach, ukryj GIF i pokaż obrazek statyczny
+                timeoutId = setTimeout(() => {
+                    document.getElementById("coinImage").src = headsStatic; // Ustaw statyczny obrazek
+                    isFlipping = false; // Przywróć flagę, aby pozwolić na nowe kliknięcie
+                }, 2700);
+            } else {
+                // Pokazuje GIF reszki
+                document.getElementById("coinImage").src = tailsGif;
+
+                // Po 2700 milisekundach, ukryj GIF i pokaż obrazek statyczny
+                timeoutId = setTimeout(() => {
+                    document.getElementById("coinImage").src = tailsStatic; // Ustaw statyczny obrazek
+                    isFlipping = false; // Przywróć flagę, aby pozwolić na nowe kliknięcie
+                }, 2700);
+            }
+        };
+    </script>
+</body>
+</html>

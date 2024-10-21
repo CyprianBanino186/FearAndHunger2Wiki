@@ -1,0 +1,223 @@
+﻿@model FearAndHunger2Wiki.Models.Postac
+@using Microsoft.AspNetCore.Authorization
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Imie - Fear and Hunger Wiki</title>
+    <link rel="stylesheet" href="~/css/style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('/img/background.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .home {
+            background-color: rgba(34, 34, 34, 0.8);
+            padding: 40px;
+            border: 1px solid #444;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .character-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .character-description {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .character-info {
+            width: 330px;
+            margin-top: 20px;
+            text-align: left;
+            padding: 15px;
+            border-radius: 0;
+            border: 1px solid #d32f2f;
+        }
+
+            .character-info h1 {
+                background-color: rgba(211, 47, 47, 0.8);
+                color: #fff;
+                padding: 15px;
+                margin: -15px -15px 15px;
+            }
+
+        .character-info-table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+            .character-info-table th,
+            .character-info-table td {
+                border: 1px solid #d32f2f;
+                padding: 8px;
+                text-align: left;
+            }
+
+            .character-info-table th {
+                background-color: rgba(211, 47, 47, 0.8);
+                color: #fff;
+            }
+
+        .stats-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+            .stats-table th,
+            .stats-table td {
+                border: 1px solid #ddd;
+                padding: 4px;
+                text-align: center;
+            }
+
+            .stats-table th {
+                background-color: #444;
+                color: white;
+            }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-button {
+            background-color: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+            .action-button:hover {
+                background-color: #b71c1c;
+            }
+    </style>
+</head>
+<body>
+    <main>
+        <section class="home">
+            <div class="character-container">
+                <div class="character-description">
+                    <h1>Fabuła</h1>
+                    <p>@Html.Raw(Model.Fabula)</p>
+                    <h1>Lokacja</h1>
+                    <p>@Model.Lokacja</p>
+                    <h1>Rekrutowanie</h1>
+                    <p>@Html.Raw(Model.Rekrutowanie)</p>
+                    <div class="staty-text">
+                        <h1>Statystyki</h1>
+                        <table class="stats-table">
+                            <tr>
+                                <th>Statystyka</th>
+                                <th>Startowa Wartość</th>
+                            </tr>
+                            <tr>
+                                <td>Atak</td>
+                                <td>@Model.StatAtak</td>
+                            </tr>
+                            <tr>
+                                <td>Obrona</td>
+                                <td>@Model.StatObrona</td>
+                            </tr>
+                            <tr>
+                                <td>Atak (Magia)</td>
+                                <td>@Model.StatMAtak</td>
+                            </tr>
+                            <tr>
+                                <td>Obrona (Magia)</td>
+                                <td>@Model.StatMObrona</td>
+                            </tr>
+                            <tr>
+                                <td>Zwinność</td>
+                                <td>@Model.StatZwinność</td>
+                            </tr>
+                            <tr>
+                                <td>Szczęście</td>
+                                <td>@Model.StatSzczęście</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="character-info">
+                    <h1>@Model.Imie</h1>
+                    <div class="character-image">
+                        <img src="@Model.Obrazek" alt="@Model.Imie">
+                    </div>
+                    <table class="character-info-table">
+                        <tr>
+                            <th>Wiek:</th>
+                            <td>@Model.Wiek</td>
+                        </tr>
+                        <tr>
+                            <th>Alias:</th>
+                            <td>@Model.Alias</td>
+                        </tr>
+                        <tr>
+                            <th>Krewni:</th>
+                            <td>@Model.Krewni</td>
+                        </tr>
+                        <tr>
+                            <th>Miejsce urodzenia:</th>
+                            <td>@Model.MiejsceUrodzenia</td>
+                        </tr>
+                        <tr>
+                            <th>Rok urodzenia:</th>
+                            <td>@Model.RokUrodzenia</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+            {
+                <div class="buttons-container">
+                    <a href="@Url.Action("Edit", new { id = Model.Id })" class="action-button">Edytuj</a>
+                    <a href="@Url.Action("Delete", new { id = Model.Id })" class="action-button">Usuń</a>
+                </div>
+            }
+        </section>
+    </main>
+</body>
+</html>

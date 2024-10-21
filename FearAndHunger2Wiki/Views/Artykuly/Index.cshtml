@@ -1,0 +1,55 @@
+﻿@model List<FearAndHunger2Wiki.Models.Artykul>
+@inject FearAndHunger2Wiki.Repositories.JsonFilePostaciRepository PostaciRepository
+
+<main>
+    <section class="home">
+        <h1>Lista Artykułów</h1>
+        <a asp-action="Create">Dodaj nowy artykuł</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tytuł</th>
+                    <th>Wygląd</th>
+                    <th>Treść</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var artykul in Model)
+                {
+                    <tr>
+                        <td>
+                            @* Link do postaci *@
+                            <a asp-controller="Postaci"
+                               asp-action="@(PostaciRepository.GetPostaci().Any(p => p.Id == artykul.Id) ? "Show" : "Create")"
+                               asp-route-id="@artykul.Id">
+                                @artykul.Tytul
+                            </a>
+                        </td>
+                        <td>
+                            @{
+                                string imageUrl;
+
+                                // Sprawdzamy, czy 'WygladUrl' zawiera protokół (http/https)
+                                if (Uri.TryCreate(artykul.WygladUrl, UriKind.Absolute, out _))
+                                {
+                                    imageUrl = artykul.WygladUrl; // To jest URL
+                                }
+                                else
+                                {
+                                    imageUrl = Url.Content("~/img/" + artykul.WygladUrl); // To jest lokalny plik
+                                }
+                            }
+                            <img src="@imageUrl" alt="Obraz @artykul.Tytul" style="width:100px; height:auto;" />
+                        </td>
+                        <td>@artykul.Tresc</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@artykul.Id">Edytuj</a> |
+                            <a asp-action="Delete" asp-route-id="@artykul.Id">Usuń</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </section>
+</main>

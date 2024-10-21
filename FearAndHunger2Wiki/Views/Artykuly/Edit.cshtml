@@ -1,0 +1,25 @@
+﻿@model FearAndHunger2Wiki.Models.Artykul
+
+<main>
+    <section class="home">
+        <h1>Edytuj Artykuł</h1>
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            <div>
+                <label asp-for="Tytul"></label>
+                <input asp-for="Tytul" required />
+            </div>
+            <div>
+                <label asp-for="WygladUrl"></label>
+                <input asp-for="WygladUrl" required />
+            </div>
+            <div>
+                <label asp-for="Tresc"></label>
+                <textarea asp-for="Tresc" required></textarea>
+            </div>
+            <button type="submit">Zapisz zmiany</button>
+        </form>
+        <a asp-controller="Artykuly" asp-action="Index">Powrót do listy artykułów</a>
+
+    </section>
+</main>

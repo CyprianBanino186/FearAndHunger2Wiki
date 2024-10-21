@@ -1,0 +1,13 @@
+﻿@model FearAndHunger2Wiki.Models.Artykul
+
+<main>
+    <section class="home">
+        <h1>Usuń artykuł</h1>
+        <h3>Czy na pewno chcesz usunąć artykuł "@Model.Tytul"?</h3>
+        <form asp-action="Delete" method="post">
+            <input type="hidden" asp-for="Id" />
+            <button type="submit">Usuń</button>
+            <a asp-action="Index">Anuluj</a>
+        </form>
+    </section>
+</main>
